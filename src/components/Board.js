@@ -12,7 +12,11 @@ export class Board extends React.Component {
   }
 
   handleClick(i) {
-    console.log(i);
+    // Make a copy of the array
+    const squares = this.state.squares.slice();
+
+    squares[i] = 'X';
+    this.setState({squares});
   }
 
   renderSquare(i) {
