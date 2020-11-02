@@ -7,7 +7,8 @@ export class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      isXNext: true
     };
   }
 
@@ -15,8 +16,11 @@ export class Board extends React.Component {
     // Make a copy of the array
     const squares = this.state.squares.slice();
 
-    squares[i] = 'X';
-    this.setState({squares});
+    squares[i] = this.state.isXNext ? 'X' : 'O';
+    this.setState({
+      squares,
+      isXNext: !this.state.isXNext
+    });
   }
 
   renderSquare(i) {
@@ -29,7 +33,7 @@ export class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = `Next player: ${this.state.isXNext ? 'X' : 'O'}`;
 
     return (
       <div>
