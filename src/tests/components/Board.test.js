@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Board } from '../../components/Board';
+import sinon from 'sinon';
 
 describe('Board component', () => {
 
@@ -24,10 +25,18 @@ describe('Board component', () => {
     expect(wrapper.find('.board-row').at(0).childAt(1).prop('value')).toBe('O');
   });
 
-  it('should display status "Next player: X" as default', () => {
+  test('should display status "Next player: X" as default', () => {
     const wrapper = shallow(<Board />);
-    // wrapper.
     expect(wrapper.find('.status').text()).toBe('Next player: X');
+  });
+
+  test('should not modify the board after clicking more than once a cell', () => {
+    const setStateSpy = sinon.spy(Board.prototype, 'setState');
+    const wrapper = shallow(<Board />);
+    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
+    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
+    expect(setStateSpy.calledTwice).toBe(false);
+    Board.prototype.setState.restore();
   });
 
 });

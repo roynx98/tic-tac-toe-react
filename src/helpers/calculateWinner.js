@@ -14,7 +14,7 @@ export function calculateWinner(board) {
     ];
 
     for (let p of possitions) {
-      if (board[p[0]] === board[p[1]] &&
+      if (board[p[0]] && board[p[0]] === board[p[1]] &&
         board[p[0]] === board[p[2]]) {
         return board[p[0]];
       }
