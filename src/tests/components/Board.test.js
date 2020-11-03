@@ -2,8 +2,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Board } from '../../components/Board';
 import sinon from 'sinon';
+import { calculateWinner } from '../../helpers/calculateWinner';
+
+jest.mock('../../helpers/calculateWinner');
 
 describe('Board component', () => {
+
+  beforeEach(() => {
+    calculateWinner.mockReturnValue(null);
+  })
 
   test('should match snapshot', async () => {
     const wrapper = shallow(<Board />);
@@ -36,7 +43,18 @@ describe('Board component', () => {
     wrapper.find('.board-row').at(0).childAt(0).simulate('click');
     wrapper.find('.board-row').at(0).childAt(0).simulate('click');
     expect(setStateSpy.calledTwice).toBe(false);
-    Board.prototype.setState.restore();
+    setStateSpy.restore();
+  });
+
+  test('should not modify the board after winning', () => {
+    const setStateSpy = sinon.spy(Board.prototype, 'setState');
+    calculateWinner.mockReturnValue('X')
+    const wrapper = shallow(<Board />);
+
+    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
+
+    expect(setStateSpy.called).toBe(false);
+    setStateSpy.restore();
   });
 
 });
