@@ -24,4 +24,10 @@ describe('Board component', () => {
     expect(wrapper.find('.board-row').at(0).childAt(1).prop('value')).toBe('O');
   });
 
+  it('should display status "Next player: X" as default', () => {
+    const wrapper = shallow(<Board />);
+    // wrapper.
+    expect(wrapper.find('.status').text()).toBe('Next player: X');
+  });
+
 });

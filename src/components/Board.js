@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Square } from './Square';
+import { calculateWinner } from '../helpers/calculateWinner';
 
 export class Board extends React.Component {
 
@@ -13,7 +14,6 @@ export class Board extends React.Component {
   }
 
   handleClick(i) {
-    // Make a copy of the array
     const squares = this.state.squares.slice();
 
     squares[i] = this.state.isXNext ? 'X' : 'O';
@@ -33,7 +33,11 @@ export class Board extends React.Component {
   }
 
   render() {
-    const status = `Next player: ${this.state.isXNext ? 'X' : 'O'}`;
+    const winner = calculateWinner(this.state.squares);
+    let status = `Next player: ${this.state.isXNext ? 'X' : 'O'}`;
+    if (winner) {
+      status = `Winner: ${winner}`;
+    }
 
     return (
       <div>
