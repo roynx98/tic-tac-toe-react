@@ -1,60 +1,43 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Board } from '../../components/Board';
-import sinon from 'sinon';
-import { calculateWinner } from '../../helpers/calculateWinner';
-
-jest.mock('../../helpers/calculateWinner');
+import sinon, { spy } from 'sinon';
 
 describe('Board component', () => {
+  const squares = [
+    'X', null, 'O',
+    null, 'O', null,
+    null, null, 'X',
+  ];
 
-  beforeEach(() => {
-    calculateWinner.mockReturnValue(null);
-  })
-
-  test('should match snapshot', async () => {
-    const wrapper = shallow(<Board />);
+  test('should match snapshot', () => {
+    const wrapper = shallow(<Board squares={squares} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('should display X at first turn', () => {
-    const wrapper = shallow(<Board />);
+  test('should match squares', () => {
+    const wrapper = shallow(<Board squares={squares} />);
+    // First row
+    expect(wrapper.find('.board-row').at(0).childAt(0).prop('value')).toBe(squares[0]);
+    expect(wrapper.find('.board-row').at(0).childAt(1).prop('value')).toBe(squares[1]);
+    expect(wrapper.find('.board-row').at(0).childAt(2).prop('value')).toBe(squares[2]);
 
-    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
-    expect(wrapper.find('.board-row').at(0).childAt(0).prop('value')).toBe('X');
-  });
-  
-  test('should display O at second turn', () => {
-    const wrapper = shallow(<Board />);
+    // Second row
+    expect(wrapper.find('.board-row').at(1).childAt(0).prop('value')).toBe(squares[3]);
+    expect(wrapper.find('.board-row').at(1).childAt(1).prop('value')).toBe(squares[4]);
+    expect(wrapper.find('.board-row').at(1).childAt(2).prop('value')).toBe(squares[5]);
 
-    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
-    wrapper.find('.board-row').at(0).childAt(1).simulate('click');
-    expect(wrapper.find('.board-row').at(0).childAt(1).prop('value')).toBe('O');
-  });
-
-  test('should display status "Next player: X" as default', () => {
-    const wrapper = shallow(<Board />);
-    expect(wrapper.find('.status').text()).toBe('Next player: X');
+    // Third row
+    expect(wrapper.find('.board-row').at(2).childAt(0).prop('value')).toBe(squares[6]);
+    expect(wrapper.find('.board-row').at(2).childAt(1).prop('value')).toBe(squares[7]);
+    expect(wrapper.find('.board-row').at(2).childAt(2).prop('value')).toBe(squares[8]);
   });
 
-  test('should not modify the board after clicking more than once a cell', () => {
-    const setStateSpy = sinon.spy(Board.prototype, 'setState');
-    const wrapper = shallow(<Board />);
-    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
-    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
-    expect(setStateSpy.calledTwice).toBe(false);
-    setStateSpy.restore();
-  });
-
-  test('should not modify the board after winning', () => {
-    const setStateSpy = sinon.spy(Board.prototype, 'setState');
-    calculateWinner.mockReturnValue('X')
-    const wrapper = shallow(<Board />);
-
-    wrapper.find('.board-row').at(0).childAt(0).simulate('click');
-
-    expect(setStateSpy.called).toBe(false);
-    setStateSpy.restore();
+  test('should call a function on click a cell', () => {
+    const onClickSpy = sinon.spy();
+    const wrapper = shallow(<Board squares={squares} onClick={onClickSpy}/>);
+    wrapper.find('.board-row').at(1).childAt(0).simulate('click');
+    expect(onClickSpy.calledOnceWith(3)).toBe(true);
   });
 
 });

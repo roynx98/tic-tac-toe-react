@@ -3,9 +3,36 @@
 exports[`Board component should match snapshot 1`] = `
 <div>
   <div
-    className="status"
+    className="board-row"
   >
-    Next player: X
+    <Square
+      onClick={[Function]}
+      value="X"
+    />
+    <Square
+      onClick={[Function]}
+      value={null}
+    />
+    <Square
+      onClick={[Function]}
+      value="O"
+    />
+  </div>
+  <div
+    className="board-row"
+  >
+    <Square
+      onClick={[Function]}
+      value={null}
+    />
+    <Square
+      onClick={[Function]}
+      value="O"
+    />
+    <Square
+      onClick={[Function]}
+      value={null}
+    />
   </div>
   <div
     className="board-row"
@@ -20,39 +47,7 @@ exports[`Board component should match snapshot 1`] = `
     />
     <Square
       onClick={[Function]}
-      value={null}
-    />
-  </div>
-  <div
-    className="board-row"
-  >
-    <Square
-      onClick={[Function]}
-      value={null}
-    />
-    <Square
-      onClick={[Function]}
-      value={null}
-    />
-    <Square
-      onClick={[Function]}
-      value={null}
-    />
-  </div>
-  <div
-    className="board-row"
-  >
-    <Square
-      onClick={[Function]}
-      value={null}
-    />
-    <Square
-      onClick={[Function]}
-      value={null}
-    />
-    <Square
-      onClick={[Function]}
-      value={null}
+      value="X"
     />
   </div>
 </div>
