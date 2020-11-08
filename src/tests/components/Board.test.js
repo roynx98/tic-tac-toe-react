@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Board } from '../../components/Board';
-import sinon, { spy } from 'sinon';
+import sinon from 'sinon';
 
 describe('Board component', () => {
   const squares = [
