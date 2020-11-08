@@ -1,38 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Game component should match snapshot 1`] = `
-<Fragment>
+<div
+  className="game"
+>
   <div
-    className="game"
+    className="game-board"
   >
-    <div
-      className="game-board"
-    >
-      <Board
-        onClick={[Function]}
-        squares={
-          Array [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ]
-        }
-      />
-    </div>
-    <div
-      className="game-info"
-    >
-      <div>
-        Next player: O
-      </div>
-      <ol />
-    </div>
+    <Board
+      onClick={[Function]}
+      squares={
+        Array [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ]
+      }
+    />
   </div>
-</Fragment>
+  <div
+    className="game-info"
+  >
+    <div>
+      Next player: O
+    </div>
+    <ol />
+  </div>
+</div>
 `;
