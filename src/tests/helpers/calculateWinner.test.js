@@ -1,4 +1,4 @@
-import { calculateWinner } from './helpers/calculateWinner';
+import { calculateWinner } from '../../helpers/calculateWinner';
 
 describe('calculateWinner function', () => {
 

@@ -30,7 +30,17 @@ exports[`Game component should match snapshot 1`] = `
     <div>
       Next player: O
     </div>
-    <ol />
+    <ol>
+      <li
+        key="0"
+      >
+        <button
+          onClick={[Function]}
+        >
+          Go to game start
+        </button>
+      </li>
+    </ol>
   </div>
 </div>
 `;
