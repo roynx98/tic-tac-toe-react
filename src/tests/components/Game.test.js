@@ -73,4 +73,14 @@ describe('Game component', () => {
     expect(componentInstance.state.history.length).toBe(historyInitLength + 1);
   });
 
+  test('should increse setNumber on handle click', () => {
+    const historyInitLength = 1;
+    const wrapper = shallow(<Game />);
+    const componentInstance = wrapper.instance();
+
+    expect(componentInstance.state.history.length).toBe(historyInitLength);
+    componentInstance.handleClick(0);
+    expect(componentInstance.state.history.length).toBe(historyInitLength + 1);
+  });
+
 });
